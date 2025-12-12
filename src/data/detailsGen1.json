@@ -11,27 +11,205 @@
     "abilities": [
       {
         "name": "심록",
-        "description": "HP가 ⅓ 이하일 때 풀 타입 기술의 위력이 1.5배가 된다."
+        "description": "위급할 때 풀타입의 위력이 올라간다."
       },
       {
         "name": "엽록소",
-        "description": "날씨가 쾌청 상태일 때 스피드가 2배가 된다."
+        "description": "맑을 때 스피드가 올라간다."
       }
     ],
     "dexEntries": [
       {
-        "versionLabel": "레드 / 블루",
-        "description": "태어날 때부터 등에 씨앗이 있어, 자라면서 점점 커진다."
+        "versionId": "scarlet",
+        "versionLabel": "스칼렛",
+        "description": "태어나서 얼마 동안 등의 씨앗에 담긴 영양을 섭취하며 자란다."
       },
       {
-        "versionLabel": "소드",
-        "description": "햇빛을 쬐면 등에 있는 씨앗이 영양분을 만든다."
+        "versionId": "violet",
+        "versionLabel": "바이올렛",
+        "description": "태어날 때부터 등에 씨앗을 짊어지고 있다. 몸이 크게 성장함에 따라 씨앗도 커진다."
       }
     ],
     "evolution": [
-      { "id": 1 },
-      { "id": 2, "level": 16 },
-      { "id": 3, "level": 32 }
+      {
+        "id": 1
+      },
+      {
+        "id": 2,
+        "level": 16
+      },
+      {
+        "id": 3,
+        "level": 32
+      }
+    ],
+    "levelUpMoves": [
+      {
+        "level": 1,
+        "moveKo": "몸통박치기",
+        "type": "Normal",
+        "categoryKo": "물리",
+        "power": 40,
+        "accuracy": 100
+      },
+      {
+        "level": 1,
+        "moveKo": "울음소리",
+        "type": "Normal",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 100
+      },
+      {
+        "level": 3,
+        "moveKo": "덩굴채찍",
+        "type": "Grass",
+        "categoryKo": "물리",
+        "power": 45,
+        "accuracy": 100
+      },
+      {
+        "level": 6,
+        "moveKo": "성장",
+        "moveEn": "Growth",
+        "type": "Normal",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": null
+      },
+      {
+        "level": 9,
+        "moveKo": "씨뿌리기",
+        "type": "Grass",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 90
+      },
+      {
+        "level": 12,
+        "moveKo": "잎날가르기",
+        "type": "Grass",
+        "categoryKo": "물리",
+        "power": 55,
+        "accuracy": 95
+      },
+      {
+        "level": 15,
+        "moveKo": "독가루",
+        "type": "Poison",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 75
+      },
+      {
+        "level": 15,
+        "moveKo": "수면가루",
+        "type": "Grass",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 75
+      },
+      {
+        "level": 21,
+        "moveKo": "씨폭탄",
+        "type": "Grass",
+        "categoryKo": "물리",
+        "power": 80,
+        "accuracy": 100
+      },
+      {
+        "level": 21,
+        "moveKo": "돌진",
+        "type": "Normal",
+        "categoryKo": "물리",
+        "power": 90,
+        "accuracy": 85
+      },
+      {
+        "level": 24,
+        "moveKo": "달콤한향기",
+        "type": "Normal",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 100
+      },
+      {
+        "level": 27,
+        "moveKo": "광합성",
+        "type": "Grass",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": null
+      },
+      {
+        "level": 30,
+        "moveKo": "고민씨",
+        "type": "Grass",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 100
+      },
+      {
+        "level": 33,
+        "moveKo": "파워휩",
+        "type": "Grass",
+        "categoryKo": "물리",
+        "power": 120,
+        "accuracy": 85
+      },
+      {
+        "level": 36,
+        "moveKo": "솔라빔",
+        "type": "Grass",
+        "categoryKo": "특수",
+        "power": 120,
+        "accuracy": 100
+      }
+    ]
+  },
+  "2": {
+    "stats": {
+      "hp": 60,
+      "atk": 62,
+      "def": 63,
+      "spAtk": 80,
+      "spDef": 80,
+      "speed": 60
+    },
+    "abilities": [
+      {
+        "name": "심록",
+        "description": "위급할 때 풀타입의 위력이 올라간다."
+      },
+      {
+        "name": "엽록소",
+        "description": "맑을 때 스피드가 올라간다."
+      }
+    ],
+    "dexEntries": [
+      {
+        "versionId": "scarlet",
+        "versionLabel": "스칼렛",
+        "description": "햇빛을 받을수록 몸에 힘이 솟아나 등의 꽃봉오리가 자라난다."
+      },
+      {
+        "versionId": "violet",
+        "versionLabel": "바이올렛",
+        "description": "등의 꽃봉오리는 양분을 흡수하며 커진다. 꽃이 필 때가 되면 좋은 향기가 난다."
+      }
+    ],
+    "evolution": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2,
+        "level": 16
+      },
+      {
+        "id": 3,
+        "level": 32
+      }
     ],
     "levelUpMoves": [
       {
@@ -51,6 +229,184 @@
         "categoryKo": "변화",
         "power": null,
         "accuracy": 100
+      },
+      {
+        "level": 7,
+        "moveKo": "덩굴채찍",
+        "moveEn": "Vine Whip",
+        "type": "Grass",
+        "categoryKo": "물리",
+        "power": 45,
+        "accuracy": 100
+      },
+      {
+        "level": 9,
+        "moveKo": "독가루",
+        "moveEn": "Poison Powder",
+        "type": "Poison",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 75
+      },
+      {
+        "level": 13,
+        "moveKo": "씨뿌리기",
+        "moveEn": "Leech Seed",
+        "type": "Grass",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 90
+      },
+      {
+        "level": 15,
+        "moveKo": "성장",
+        "moveEn": "Growth",
+        "type": "Normal",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": null
+      },
+      {
+        "level": 19,
+        "moveKo": "잎날가르기",
+        "moveEn": "Razor Leaf",
+        "type": "Grass",
+        "categoryKo": "물리",
+        "power": 55,
+        "accuracy": 95
+      },
+      {
+        "level": 21,
+        "moveKo": "수면가루",
+        "moveEn": "Sleep Powder",
+        "type": "Grass",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 75
+      }
+    ]
+  },
+  "3": {
+    "stats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 83,
+      "spAtk": 100,
+      "spDef": 100,
+      "speed": 80
+    },
+    "abilities": [
+      {
+        "name": "심록",
+        "description": "위급할 때 풀타입의 위력이 올라간다."
+      },
+      {
+        "name": "엽록소",
+        "description": "맑을 때 스피드가 올라간다."
+      }
+    ]
+  },
+  "4": {
+    "stats": {
+      "hp": 39,
+      "atk": 52,
+      "def": 43,
+      "spAtk": 60,
+      "spDef": 50,
+      "speed": 65
+    },
+    "abilities": [
+      {
+        "name": "맹화",
+        "description": "위급할 때 불꽃타입의 위력이 올라간다."
+      },
+      {
+        "name": "선파워",
+        "description": "맑으면 HP가 줄지만 특수공격이 올라간다."
+      }
+    ]
+  },
+  "133": {
+    "stats": {
+      "hp": 55,
+      "atk": 55,
+      "def": 50,
+      "spAtk": 45,
+      "spDef": 65,
+      "speed": 55
+    },
+    "abilities": [
+      {
+        "name": "도주",
+        "description": "야생 포켓몬으로부터 반드시 도망칠 수 있다."
+      },
+      {
+        "name": "적응력",
+        "description": "타입이 같은 기술의 위력이 올라간다."
+      },
+      {
+        "name": "위험예지",
+        "description": "상대가 지닌 위험한 기술을 감지한다."
+      }
+    ]
+  },
+  "134": {
+    "stats": {
+      "hp": 130,
+      "atk": 65,
+      "def": 60,
+      "spAtk": 110,
+      "spDef": 95,
+      "speed": 65
+    },
+    "abilities": [
+      {
+        "name": "저수",
+        "description": "물을 받으면 회복한다."
+      },
+      {
+        "name": "촉촉바디",
+        "description": "비가 오면 상태 이상이 회복된다."
+      }
+    ]
+  },
+  "135": {
+    "stats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 60,
+      "spAtk": 110,
+      "spDef": 95,
+      "speed": 130
+    },
+    "abilities": [
+      {
+        "name": "축전",
+        "description": "전기를 받으면 회복한다."
+      },
+      {
+        "name": "속보",
+        "description": "상태 이상이 되면 스피드가 올라간다."
+      }
+    ]
+  },
+  "136": {
+    "stats": {
+      "hp": 65,
+      "atk": 130,
+      "def": 60,
+      "spAtk": 95,
+      "spDef": 110,
+      "speed": 65
+    },
+    "abilities": [
+      {
+        "name": "타오르는불꽃",
+        "description": "불꽃을 받으면 불꽃 기술이 강해진다."
+      },
+      {
+        "name": "근성",
+        "description": "상태 이상이 되면 공격이 올라간다."
       }
     ]
   }

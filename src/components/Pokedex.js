@@ -340,7 +340,6 @@ function Pokedex() {
                           fontSize: "0.8rem",
                         }}
                       >
-                        <thead>...</thead>
                         <tbody>
                           {details.dexEntries.map((entry, idx) => (
                             <tr key={idx}>
@@ -380,15 +379,58 @@ function Pokedex() {
                   {details.stats ? (
                     <div style={{ marginBottom: "1rem" }}>
                       {/* stats table */}
-                      <tbody>
-                        <tr>
-                          <td style={{ padding: "0.25rem 0.5rem" }}>HP</td>
-                          <td style={{ padding: "0.25rem 0.5rem" }}>
-                            {details.stats.hp}
-                          </td>
-                        </tr>
-                        {/* ... 기타 능력치 ... */}
-                      </tbody>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              <strong>HP</strong>
+                            </td>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              {details.stats.hp}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              <strong>공격</strong>
+                            </td>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              {details.stats.atk}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              <strong>방어</strong>
+                            </td>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              {details.stats.def}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              <strong>특수공격</strong>
+                            </td>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              {details.stats.spAtk}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              <strong>특수방어</strong>
+                            </td>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              {details.stats.spDef}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              <strong>스피드</strong>
+                            </td>
+                            <td style={{ padding: "0.25rem 0.5rem" }}>
+                              {details.stats.speed}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   ) : (
                     <p style={{ fontSize: "0.8rem", color: "#777" }}>
@@ -530,7 +572,7 @@ function Pokedex() {
                                         padding: "0.25rem 0.5rem",
                                       }}
                                     >
-                                      {m.moveKo} ({m.moveEn})
+                                      {m.moveKo}
                                     </td>
                                     <td
                                       style={{
