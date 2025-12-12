@@ -1,0 +1,57 @@
+{
+  "1": {
+    "stats": {
+      "hp": 45,
+      "atk": 49,
+      "def": 49,
+      "spAtk": 65,
+      "spDef": 65,
+      "speed": 45
+    },
+    "abilities": [
+      {
+        "name": "심록",
+        "description": "HP가 ⅓ 이하일 때 풀 타입 기술의 위력이 1.5배가 된다."
+      },
+      {
+        "name": "엽록소",
+        "description": "날씨가 쾌청 상태일 때 스피드가 2배가 된다."
+      }
+    ],
+    "dexEntries": [
+      {
+        "versionLabel": "레드 / 블루",
+        "description": "태어날 때부터 등에 씨앗이 있어, 자라면서 점점 커진다."
+      },
+      {
+        "versionLabel": "소드",
+        "description": "햇빛을 쬐면 등에 있는 씨앗이 영양분을 만든다."
+      }
+    ],
+    "evolution": [
+      { "id": 1 },
+      { "id": 2, "level": 16 },
+      { "id": 3, "level": 32 }
+    ],
+    "levelUpMoves": [
+      {
+        "level": 1,
+        "moveKo": "몸통박치기",
+        "moveEn": "Tackle",
+        "type": "Normal",
+        "categoryKo": "물리",
+        "power": 40,
+        "accuracy": 100
+      },
+      {
+        "level": 3,
+        "moveKo": "울음소리",
+        "moveEn": "Growl",
+        "type": "Normal",
+        "categoryKo": "변화",
+        "power": null,
+        "accuracy": 100
+      }
+    ]
+  }
+}

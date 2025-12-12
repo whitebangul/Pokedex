@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Pokedex from "./components/Pokedex";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={{ minHeight: "100vh", backgroundColor: "#f5f5f5" }}>
+      {/* Header with global language toggle */}
+      <header
+        style={{
+          borderBottom: "1px solid #e5e5e5",
+          backgroundColor: "#ffffff",
+          marginBottom: "1rem",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "960px",
+            margin: "0 auto",
+            padding: "0.75rem 1rem",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          Learn React
-        </a>
+          <div style={{ fontWeight: "600", fontSize: "1rem" }}>Pokédex</div>
+        </div>
       </header>
+
+      {/* Main content */}
+      <main>
+        <Pokedex />
+      </main>
     </div>
   );
 }

@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "koName": "이상해씨",
+    "enName": "Bulbasaur",
+    "types": ["Grass", "Poison"],
+    "category": "씨앗포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+  },
+  {
+    "id": 2,
+    "koName": "이상해풀",
+    "enName": "Ivysaur",
+    "types": ["Grass", "Poison"],
+    "category": "씨앗포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+  },
+  {
+    "id": 3,
+    "koName": "이상해꽃",
+    "enName": "Venusaur",
+    "types": ["Grass", "Poison"],
+    "category": "씨앗포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+  },
+  {
+    "id": 133,
+    "koName": "이브이",
+    "enName": "Eevee",
+    "types": ["Normal"],
+    "category": "진화포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"
+  },
+  {
+    "id": 134,
+    "koName": "샤미드",
+    "enName": "Vaporeon",
+    "types": ["Water"],
+    "category": "버블제트포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png"
+  },
+  {
+    "id": 135,
+    "koName": "쥬피썬더",
+    "enName": "Jolteon",
+    "types": ["Electric"],
+    "category": "번개포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/135.png"
+  },
+  {
+    "id": 136,
+    "koName": "부스터",
+    "enName": "Flareon",
+    "types": ["Fire"],
+    "category": "불꽃포켓몬",
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/136.png"
+  }
+]

@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+body {
+  font-family: "Helvetica";
+}
+
+.black-nav {
+  background: black;
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 20px;
+  font-weight: 600;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
