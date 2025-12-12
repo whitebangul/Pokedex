@@ -1,9 +1,9 @@
 // src/data/pokemon-index.js
-import basicsGen1 from "./basicsGen1.json";
-import detailsGen1 from "./detailsGen1.json";
+import basics from "./Allbasics.json";
+import details from "./Alldetails.json";
 
-export const POKEMON_BASIC = basicsGen1;
-export const POKEMON_DETAILS = detailsGen1;
+export const POKEMON_BASIC = basics;
+export const POKEMON_DETAILS = details;
 
 export const POKEMON_TYPES = [
   "All",
