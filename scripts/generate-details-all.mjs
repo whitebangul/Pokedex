@@ -5,7 +5,7 @@ import path from "node:path";
 
 const ROOT = process.cwd();
 
-const BASICS_PATH = path.join(ROOT, "src", "data", "basicsGen1.json");
+const BASICS_PATH = path.join(ROOT, "src", "data", "Allbasics.json");
 const OUT_PATH = path.join(ROOT, "src", "data", "detailsAll.json");
 
 const API = "https://pokeapi.co/api/v2";
@@ -21,7 +21,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function fetchJson(url, attempt = 0) {
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
     return await res.json();
   } catch (err) {
     if (attempt >= MAX_RETRIES) throw err;
@@ -52,7 +52,9 @@ function pickFlavorText(entries, lang, fallbackLang = "en") {
 }
 
 function mapStats(pokemonJson) {
-  const map = new Map(pokemonJson.stats.map((s) => [s.stat.name, s.base_stat]));
+  const map = new Map(
+    (pokemonJson.stats ?? []).map((s) => [s.stat?.name, s.base_stat])
+  );
 
   return {
     hp: map.get("hp") ?? null,
@@ -62,6 +64,12 @@ function mapStats(pokemonJson) {
     spDef: map.get("special-defense") ?? null,
     speed: map.get("speed") ?? null,
   };
+}
+
+function idFromUrl(url) {
+  // e.g. "https://pokeapi.co/api/v2/pokemon-species/2/" -> 2
+  const m = String(url).match(/\/(\d+)\/?$/);
+  return m ? Number(m[1]) : null;
 }
 
 /* ---------------- ability fetch ---------------- */
@@ -82,11 +90,138 @@ async function getAbilityLocalized(abilityName) {
   return { name, description };
 }
 
+/* ---------------- evolution chain parsing ---------------- */
+
+// Cache: evolution_chain.url -> { ids: Set<number>, evolutionList: Array<{id, level, method}> }
+const evoListCache = new Map();
+function extractEvolutionMethod(details = {}) {
+  if (details.min_level != null) {
+    return "level-up";
+  }
+
+  if (details.item?.name) {
+    return `use-item:${details.item.name}`;
+  }
+
+  if (details.trigger?.name === "trade") {
+    if (details.held_item?.name) {
+      return `trade-holding:${details.held_item.name}`;
+    }
+    return "trade";
+  }
+
+  if (details.min_happiness != null) {
+    return "friendship";
+  }
+
+  if (details.time_of_day) {
+    return `level-up:${details.time_of_day}`;
+  }
+
+  if (details.known_move?.name) {
+    return `knows-move:${details.known_move.name}`;
+  }
+
+  if (details.known_move_type?.name) {
+    return `knows-move-type:${details.known_move_type.name}`;
+  }
+
+  if (details.location?.name) {
+    return `location:${details.location.name}`;
+  }
+
+  return details.trigger?.name ?? "unknown";
+}
+// ---- species + evolution-chain caches ----
+const speciesCache = new Map(); // id -> species json
+const evoChainCache = new Map(); // evoUrl -> evolution-chain json
+
+async function getSpecies(id) {
+  if (speciesCache.has(id)) return speciesCache.get(id);
+  const sp = await fetchJson(`${API}/pokemon-species/${id}`);
+  await sleep(REQUEST_DELAY_MS);
+  speciesCache.set(id, sp);
+  return sp;
+}
+
+async function getEvolutionChain(evoUrl) {
+  if (evoChainCache.has(evoUrl)) return evoChainCache.get(evoUrl);
+  const chain = await fetchJson(evoUrl);
+  await sleep(REQUEST_DELAY_MS);
+  evoChainCache.set(evoUrl, chain);
+  return chain;
+}
+
+function collectAllSpeciesIds(node, set) {
+  const nodeId = idFromUrl(node?.species?.url);
+  if (nodeId != null) set.add(nodeId);
+  for (const child of node?.evolves_to ?? []) {
+    collectAllSpeciesIds(child, set);
+  }
+}
+
+function collectEvolutionsFromRoot(rootNode) {
+  // Produces a flat list of ALL descendants from the base.
+  // Each entry describes how that descendant is reached from its direct parent.
+  const out = [];
+
+  const dfs = (n) => {
+    for (const child of n?.evolves_to ?? []) {
+      const childId = idFromUrl(child?.species?.url);
+
+      const evoDetails = (child?.evolution_details ?? [])[0] ?? {};
+      const level = evoDetails.min_level ?? null;
+      const method = extractEvolutionMethod(evoDetails);
+
+      if (childId != null) out.push({ id: childId, level, method });
+
+      dfs(child);
+    }
+  };
+
+  dfs(rootNode);
+  return out;
+}
+
+async function getEvolutionListForChainUrl(evoUrl) {
+  if (evoListCache.has(evoUrl)) return evoListCache.get(evoUrl);
+
+  const evoChain = await getEvolutionChain(evoUrl);
+  const root = evoChain?.chain;
+  if (!root) {
+    const empty = { ids: new Set(), evolutionList: [] };
+    evoListCache.set(evoUrl, empty);
+    return empty;
+  }
+
+  const ids = new Set();
+  collectAllSpeciesIds(root, ids);
+
+  const evolutionList = collectEvolutionsFromRoot(root);
+
+  const packed = { ids, evolutionList };
+  evoListCache.set(evoUrl, packed);
+  return packed;
+}
+
+async function getEvolutionForPokemonId(id) {
+  const species = await getSpecies(id);
+  const evoUrl = species?.evolution_chain?.url;
+  if (!evoUrl) return [];
+
+  const { ids, evolutionList } = await getEvolutionListForChainUrl(evoUrl);
+
+  // Safety: only return if this Pokémon is actually in that chain
+  if (!ids.has(id)) return [];
+
+  // Same chain for base + all evolved forms
+  return evolutionList;
+}
+
 /* ---------------- main ---------------- */
 
 async function main() {
   const basics = JSON.parse(await fs.readFile(BASICS_PATH, "utf-8"));
-
   const out = {};
 
   for (let i = 0; i < basics.length; i++) {
@@ -101,7 +236,7 @@ async function main() {
 
       const stats = mapStats(pokemon);
 
-      const abilityNames = pokemon.abilities
+      const abilityNames = (pokemon.abilities ?? [])
         .map((a) => a.ability?.name)
         .filter(Boolean);
 
@@ -110,9 +245,11 @@ async function main() {
         abilities.push(await getAbilityLocalized(name));
       }
 
-      out[key] = { stats, abilities };
+      const evolution = await getEvolutionForPokemonId(id);
+
+      out[key] = { stats, abilities, evolution };
     } catch (e) {
-      console.error(`Failed Pokémon ID ${id}:`, e.message);
+      console.error(`Failed Pokémon ID ${id}:`, e?.message ?? e);
     }
   }
 
