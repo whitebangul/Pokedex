@@ -210,6 +210,8 @@ function Pokedex() {
               padding: "1.5rem",
               maxWidth: "520px",
               width: "90%",
+              maxHeight: "85vh",
+              overflowY: "auto",
               boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
             }}
           >
@@ -766,10 +768,19 @@ function Pokedex() {
                       const baseMon = getMon(base.id);
 
                       return (
-                        <div style={{ overflowX: "auto" }}>
+                        <div style={{ overflowX: "auto", maxWidth: "100%" }}>
                           <div className="evo-branch-card">
                             {baseMon && (
-                              <div className="evo-branch-base">
+                              <div
+                                  className={
+                                    "evo-branch-base evo-stage evo-stage-clickable" + (baseMon.id === selectedPokemon.id ? " evo-stage-active" : "")
+                                  }
+                                  onClick={() => {
+                                    setSelectedPokemon(baseMon);
+                                    setModalTab("info");
+                                    setMovesPage(0);
+                                  }}
+                              >
                                 <div className="evo-stage-image evo-branch-base-image">
                                   <img
                                     src={baseMon.imageUrl}
